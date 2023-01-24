@@ -9,7 +9,7 @@ const data = {
       brand: 'apple',
       rating: 4.5,
       numReview: 8,
-      countInStock: 20,
+      countInStock: 5,
       description: 'A popular Earpod',
     },
     {
