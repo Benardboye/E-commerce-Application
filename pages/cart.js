@@ -3,19 +3,27 @@ import { Layout } from '../component/Layout';
 import { Store } from '../utils/Store';
 import { useRouter } from 'next/router';
 import { XCircleIcon } from '@heroicons/react/outline';
-import Link from "next/link"
+import Link from 'next/link';
 
 const CartScreen = () => {
   const { state, dispatch } = useContext(Store);
-  const router = useRouter()
-  const{ cart: { cartItems } }= state;
+  const router = useRouter();
+  const {
+    cart: { cartItems },
+  } = state;
 
-  const removeItemHandler=(item)=>{
-
-    // THE PRODUCT THAT IS GOING TO BE REMOVED IS TAGGED 
+  const removeItemHandler = (item) => {
+    // THE PRODUCT THAT IS GOING TO BE REMOVED IS TAGGED
     // ITEM AND ITS PASSED AS A PAYLOAD
     dispatch({ type: 'CART_REMOVE_ITEM', payload: item });
-  }
+  };
+
+  const updateCartHandler = (item, qty) => {
+    const quantity = Number(qty);
+    // UPDATE THE QUANTITY OF THE SELECTED ITEM
+    dispatch({ type: 'CART_ADD_ITEM', payload: { ...item, quantity } });
+  };
+
   return (
     <Layout title="Shopping Cart">
       <h1 className="mb-4 text-xl">Shopping Cart</h1>
@@ -45,7 +53,7 @@ const CartScreen = () => {
                       >
                         <img
                           src={item.image}
-                          alt={item / name}
+                          alt={item.name}
                           width={50}
                           height={50}
                         />
@@ -54,9 +62,23 @@ const CartScreen = () => {
                         {item.name}
                       </Link>
                     </td>
-                    <td className="px-5 text-right">{item.quantity}</td>
-                    <td className="px-5 text-right">{item.price}</td>
-                    <td className="px-5 text-center">
+                    <td className="p-5  text-right">
+                      {/* QUANTITY SELECT OPTION */}
+                      <select
+                        value={item.quantity}
+                        onChange={(e) =>
+                          updateCartHandler(item, e.target.value)
+                        }
+                      >
+                        {[...Array(item.countInStock).keys()].map((x) => (
+                          <option key={x + 1} value={x + 1}>
+                            {x + 1}
+                          </option>
+                        ))}
+                      </select>
+                    </td>
+                    <td className="p-5 text-right">{item.price}</td>
+                    <td className="p-5 text-center">
                       <button onClick={() => removeItemHandler(item)}>
                         <XCircleIcon className="h-5 w-5"></XCircleIcon>
                       </button>
@@ -67,22 +89,25 @@ const CartScreen = () => {
             </table>
           </div>
           <div className="card p-5">
-          <ul>
-            <li>
-              <div className="pb-3 text-xl">
-                {/* SUMUP THE TOTAL PRODUCT PRICE  */}
-                Subtotal ({cartItems.reduce((a, c) => a + c.quantity, 0)}) : $
-                {/* MULTIPLY THE PRICE AND QUANTITY */}
-                {cartItems.reduce((a, c) => a + c.quantity * c.price, 0)}
-              </div>
-            </li>
-            <li>
-                <button onClick={() => router.push("/shipping")} className='primary-button w-full'> 
-                        Checkout
+            <ul>
+              <li>
+                <div className="pb-3 text-xl">
+                  {/* SUMUP THE TOTAL PRODUCT PRICE  */}
+                  Subtotal ({cartItems.reduce((a, c) => a + c.quantity, 0)}) : $
+                  {/* MULTIPLY THE PRICE AND QUANTITY */}
+                  {cartItems.reduce((a, c) => a + c.quantity * c.price, 0)}
+                </div>
+              </li>
+              <li>
+                <button
+                  onClick={() => router.push('/shipping')}
+                  className="primary-button w-full"
+                >
+                  Checkout
                 </button>
-            </li>
-          </ul>
-        </div>
+              </li>
+            </ul>
+          </div>
         </div>
       )}
     </Layout>
