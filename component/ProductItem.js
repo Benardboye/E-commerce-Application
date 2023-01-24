@@ -3,7 +3,6 @@ import Link from 'next/link';
 
 //***********************  DISPLAY PRODUCTS  **************** *//
 export default function ProductItem({ product }) {
-  console.log(product)
   return (
     
     <>

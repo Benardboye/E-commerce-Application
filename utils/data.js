@@ -9,7 +9,7 @@ const data = {
       brand: 'apple',
       rating: 4.5,
       numReview: 8,
-      constInStock: 20,
+      countInStock: 20,
       description: 'A popular Earpod',
     },
     {
@@ -21,7 +21,7 @@ const data = {
         brand: 'Oraimo',
         rating: 4.5,
         numReview: 8,
-        constInStock: 20,
+        countInStock: 20,
         description: 'A popular Earpod',
       },
     {
@@ -33,7 +33,7 @@ const data = {
         brand: 'Samsung',
         rating: 3.2,
         numReview: 10,
-        constInStock: 20,
+        countInStock: 20,
         description: 'A popular Phone',
       },
       {
@@ -45,7 +45,7 @@ const data = {
         brand: 'JBL',
         rating: 3.2,
         numReview: 3,
-        constInStock: 70,
+        countInStock: 70,
         description: 'A popular Headset',
       },
       {
@@ -57,7 +57,7 @@ const data = {
         brand: 'Apple',
         rating: 3.2,
         numReview: 3,
-        constInStock: 70,
+        countInStock: 70,
         description: 'A popular Laptop',
       },
       {
@@ -69,7 +69,7 @@ const data = {
         brand: 'MSI',
         rating: 3.2,
         numReview: 3,
-        constInStock: 70,
+        countInStock: 70,
         description: 'A popular Laptop',
       },
       {
@@ -81,7 +81,7 @@ const data = {
         brand: 'ROG',
         rating: 3.2,
         numReview: 3,
-        constInStock: 70,
+        countInStock: 70,
         description: 'A popular Laptop',
       },
       {
@@ -93,7 +93,7 @@ const data = {
         brand: 'Apple',
         rating: 3.2,
         numReview: 3,
-        constInStock: 70,
+        countInStock: 70,
         description: 'A popular phone',
       },
       {
@@ -105,7 +105,7 @@ const data = {
         brand: 'Redmi',
         rating: 3.2,
         numReview: 3,
-        constInStock: 70,
+        countInStock: 70,
         description: 'A popular phone',
       },
   ],
