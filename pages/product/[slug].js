@@ -9,6 +9,10 @@ import { Store } from '../../utils/Store';
 /**************************** DISPLAY PRODUCT DETAILS  **********************************/
 export default function ProductScreen() {
   const { state, dispatch } = useContext(Store);
+  //FOR NAVIGATION
+  const router = useRouter();
+
+  //FOCUSING AT THE PARAMS THAT'S ATTACHED TO URLs
   const { query } = useRouter();
   const { slug } = query;
 
@@ -28,6 +32,8 @@ export default function ProductScreen() {
     }
 
     dispatch({ type: 'CART_ADD_ITEM', payload: { ...product, quantity } });
+    // NAVIGATE USER TO CART AFTER CLICKING ADD TO CART
+    router.push('/cart');
   };
 
   return (

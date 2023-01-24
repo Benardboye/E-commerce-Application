@@ -1,6 +1,5 @@
 import { createContext, useReducer } from 'react';
 
-
 export const Store = createContext();
 
 const initialState = {
@@ -21,6 +20,15 @@ function reducer(state, action) {
         : [...state.cart.cartItems, newItem];
       return { ...state, cart: { ...state.cart, cartItems } };
     }
+    case 'CART_REMOVE_ITEM': {
+      // THIS RETUNR ALL ITEMS EXCEPT THE ONE THAT IS PASSED AS SLUG
+      const cartItems = state.cart.cartItems.filter(
+        (item) => item.slug !== action.payload.slug
+      );
+      // KEEP THE PREVIOUS STATE, IN THE CART, KEEP THE PREVIOUS STATE
+      // AND PASS THE CARTITEMS AS A PARAMETER
+      return { ...state, cart: { ...state.cart, cartItems } };
+    }
     default:
       return state;
   }
@@ -28,6 +36,6 @@ function reducer(state, action) {
 
 export function StoreProvider({ children }) {
   const [state, dispatch] = useReducer(reducer, initialState);
-  const value = {state, dispatch}
+  const value = { state, dispatch };
   return <Store.Provider value={value}>{children}</Store.Provider>;
 }
