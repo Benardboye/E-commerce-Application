@@ -1,17 +1,45 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Layout } from '../component/Layout';
 import { useForm } from 'react-hook-form';
 import Link from 'next/link';
+import { getError } from '../utils/error';
+import {signIn, useSession } from "next-auth/react"
+import {toast} from "react-toastify"
+import { useRouter } from 'next/router';
 
+/************************ USER LOGIN ********************/ 
 export default function login() {
+
+    const { data: session} = useSession()
+
+    const router = useRouter()
+    const {redirect} = router.query
+
+    useEffect(() =>{
+if(session?.user) {
+router.push(redirect || "/")
+}
+    }, [router, session, redirect])
+
   const {
     handleSubmit,
     register,
     formState: { errors },
   } = useForm();
 
-  const submitHandler = ({ phone, password }) => {
-    
+  const submitHandler = async({ phone, password }) => {
+    try{
+        const result = await signIn("credentials", {
+            redirect : false,
+            phone,
+            password,
+        })
+        if(result.error) {
+            toast.error(result.error)
+        }
+    } catch(err){
+        toast.error(getError(err))
+    }
   };
 
   return (
@@ -27,7 +55,7 @@ export default function login() {
             type="phone"
             {...register('phone', { required: 'Please enter phone number', 
         pattern: {
-            value:  /(^(\+8801|8801|01|008801))[1|3-9]{1}(\d){8}$/,
+            value: /(^(\+88|0088)?(01){1}[3456789]{1}(\d){8})$/,
             message: "Please enter a Bangladeshi phone number",
         }
         })}
