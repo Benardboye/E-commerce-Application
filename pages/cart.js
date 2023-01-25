@@ -20,7 +20,7 @@ function CartScreen() {
     // ITEM AND ITS PASSED AS A PAYLOAD
     dispatch({ type: 'CART_REMOVE_ITEM', payload: item });
   };
-
+ 
   const updateCartHandler = async(item, qty) => {
     const quantity = Number(qty);
     const { data } = await axios.get(`/api/products/${item._id}`);

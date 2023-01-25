@@ -9,7 +9,7 @@ import Link from 'next/link';
 import { Store } from '../../utils/Store';
 
 /**************************** DISPLAY PRODUCT DETAILS  **********************************/
-export default function ProductScreen({ product, addToCartHandler }) {
+export default function ProductScreen({ product }) {
   const { state, dispatch } = useContext(Store);
   //FOR NAVIGATION
   const router = useRouter();
