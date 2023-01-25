@@ -92,7 +92,7 @@ function CartScreen() {
           <div className="card p-5">
             <ul>
               <li>
-                <div className="pb-3 text-xl">
+                <div className="pb-3 text-xl ">
                   {/* SUMUP THE TOTAL PRODUCT PRICE  */}
                   Subtotal ({cartItems.reduce((a, c) => a + c.quantity, 0)}) : $
                   {/* MULTIPLY THE PRICE AND QUANTITY */}
