@@ -20,6 +20,8 @@ function reducer(state, action) {
     //   FAILED DATA FETCHING
     case 'FETCH_FAIL':
       return { ...state, loading: false, error: action.payload };
+
+    /*************** PAYMENT STATUS TO THE DB****************/   
     case 'PAY_REQUEST':
       return { ...state, loadingPay: true };
     case 'PAY_SUCCESS':
@@ -138,6 +140,7 @@ function OrderScreen() {
       });
   }
 
+  /******************CONFIRM PAYMENT********************/
   function onApprove(data, actions) {
     return actions.order.capture().then(async function (details) {
       try {
@@ -154,6 +157,8 @@ function OrderScreen() {
       }
     });
   }
+
+/***********ERROR***********/   
   function onError(err) {
     toast.error(getError(err));
   }
@@ -224,8 +229,8 @@ function OrderScreen() {
                   {orderItems.map((item) => (
                     <tr key={item._id} className="border-b">
                       <td>
-                        <Link href={`/product/${item.slug}`}>
-                          <a className="flex items-center">
+                        <Link href={`/product/${item.slug}`} className="flex items-center">
+                        
                             <Image
                               src={item.image}
                               alt={item.name}
@@ -234,7 +239,7 @@ function OrderScreen() {
                             ></Image>
                             &nbsp;
                             {item.name}
-                          </a>
+                         
                         </Link>
                       </td>
                       <td className=" p-5 text-right">{item.quantity}</td>
