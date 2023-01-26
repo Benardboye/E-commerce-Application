@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import React, { useContext, useEffect, useState } from 'react';
 import Link from 'next/link';
-import Cookies from "js-cookie"
+import Cookies from 'js-cookie';
 import { ToastContainer } from 'react-toastify';
 import { Store } from '../utils/Store';
 import { signOut, useSession } from 'next-auth/react';
@@ -19,11 +19,11 @@ export const Layout = ({ title, children }) => {
     setCartItemsCount(cart.cartItems.reduce((a, c) => a + c.quantity, 0));
   }, [cart.cartItems]);
 
-  const logoutClickHandler=() =>{
-Cookies.remove("cart")
-dispatch({type: "CART_RESET"})
-signOut({callbackurl: "/login"})
-  }
+  const logoutClickHandler = () => {
+    Cookies.remove('cart');
+    dispatch({ type: 'CART_RESET' });
+    signOut({ callbackurl: '/login' });
+  };
 
   return (
     <>
@@ -59,18 +59,30 @@ signOut({callbackurl: "/login"})
                     {session.user.name}
                   </Menu.Button>
                   <Menu.Items className="absolute right-0 w-56 origin-top-right  bg-white  shadow-lg">
-                    <Menu.Item >
-                      <DropdownLink className="dropdown-link" href="/profile">
-                        Profile
-                      </DropdownLink>
-                    </Menu.Item>
-                    <Menu.Item >
-                      <DropdownLink className="dropdown-link" href="/oder-history">
+                    <Menu.Item>
+                      <DropdownLink
+                        className="dropdown-link"
+                        href="/order-history"
+                      >
                         Order History
                       </DropdownLink>
                     </Menu.Item>
-                    <Menu.Item >
-                      <DropdownLink className="dropdown-link" href="#" onClick={logoutClickHandler}>
+
+                    <Menu.Item>
+                      <DropdownLink
+                        className="dropdown-link"
+                        href="/admin/dashboard"
+                      >
+                        Admin Dashboard
+                      </DropdownLink>
+                    </Menu.Item>
+
+                    <Menu.Item>
+                      <DropdownLink
+                        className="dropdown-link"
+                        href="#"
+                        onClick={logoutClickHandler}
+                      >
                         Logout
                       </DropdownLink>
                     </Menu.Item>
